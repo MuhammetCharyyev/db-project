@@ -76,6 +76,10 @@ select FIRST_NAME, LAST_NAME, SALARY
 from EMPLOYEES
 where SALARY > 5000 AND SALARY< 12000;
 
+--range checking using BETWEEN ... AND
+select * from EMPLOYEES
+where SALARY between 5000 and 12000;
+
 --display employees that have JOB_ID of:
 --AD_VP
 --AD_ASST
@@ -85,4 +89,79 @@ SELECT * FROM EMPLOYEES
 WHERE JOB_ID = 'AD_VP' OR JOB_ID = 'AD_ASST' OR
       JOB_ID = 'FI_ACCOUNT' OR JOB_ID='AC_ACCOUNT' ;
 
+--using keyword IN for multiply possible value of same column
+SELECT FIRST_NAME, JOB_ID from EMPLOYEES
+WHERE JOB_ID IN ('AD_VP','AD_ASST','FI_ACCOUNT','AC_ACCOUNT') ;
+
+        --using not equal != or <> -> meaning the same:
+--find all regions except with REGION_ID of 1
+select * from REGIONS
+where REGION_ID !=1;-- or REGION_ID <>1
+
+select *from REGIONS
+where REGION_NAME <> 'Americas';
+
+       --for BETWEEN AND -> NOT BETWEEN .. AND
+--display employee DOES not make more 5000 and less 12000
+select FIRST_NAME, SALARY from EMPLOYEES
+where SALARY not between 5000 and 12000;
+
+        --for IN -> NOT IN
+--display employees that DOES not have JOB_ID of any:
+--AD_VP--AD_ASST--FI_ACCOUNT--AC_ACCOUNT
+select FIRST_NAME, JOB_ID
+from EMPLOYEES
+where JOB_ID not in ('AD_VP','AD_ASST','FI_ACCOUNT','AC_ACCOUNT');
+
+     --how to use NULL value in condition
+--find depts with null man_id (does NOT have man_id)
+select * from DEPARTMENTS
+where MANAGER_ID is null; --not '=' but 'is'
+
+--find depts with NOT null man_id (does have man_id)
+select * from DEPARTMENTS
+where MANAGER_ID is not null; -- not '!=' but 'is not'
+
+
+--sorting in ascending order (low to high)
+--or descending (high to low)
+--order by clause can be used to order the result of query
+--it used either column name or column index
+--it must be the last part of statement
+-- ASC for (LOW TO HIGH ) by default ,
+-- DESC  (HIGH TO LOW )
+
+-- Display Employee FIRST_NAME and LAST_NAME and Salary
+-- try to sort by below criteria separately
+-- FIRST_NAME ASC
+-- Salary DESC
+-- LAST_NAME DESC
+select FIRST_NAME, LAST_NAME, SALARY
+from EMPLOYEES
+order by FIRST_NAME;-- or 'order by FIRST_NAME asc
+--order by SALARY desc --descending order
+--order by LAST_NAME desc
+--order by 1 desc --this means sort of result by first column, find by index num
+-- in SQL index starting from 1 not 0
+
+
+         --what about the partial search?
+--use LIKE AND % (Wild Card)
+-- '%' can represent 0 or more character of any kind
+-- '_' can represent exactly one character of any kind
+
+--display all first name starting with letter 'A' in Employee
+select FIRST_NAME
+from EMPLOYEES
+where FIRST_NAME like 'A%';-- % after letter will find starting with this letter
+
+--display all first name ending with letter 'a' in Employee
+select FIRST_NAME
+from EMPLOYEES
+where FIRST_NAME like '%a'; -- % before letter will find ending with this letter
+
+--display all first name that contains letter 'a'
+select FIRST_NAME
+from EMPLOYEES
+where FIRST_NAME like '%a%';-- % before and after letter will find any word with this letter
 
