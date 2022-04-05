@@ -281,5 +281,38 @@ group by REGION_ID;
 
 --display count of depts in each location_id
 
+             --HAVING
+--can be used after 'group by' filter
+--already combined result further more
+--you can only use HAVING if using aggregate functions in condition
+--for example if count of employees in each dept more than 10
+
+
+--display count of employees in each dept
+--only display if the count are more than 10
+select DEPARTMENT_ID,
+       count(*) as "DEP_EMP_COUNT"
+from EMPLOYEES
+group by DEPARTMENT_ID
+having count(*) >10;
+
+--display max salary in each dept if the dept max salary is more 10000
+select DEPARTMENT_ID, max(SALARY)
+from EMPLOYEES
+group by DEPARTMENT_ID
+having max(SALARY) > 10000;
+
+--display max salary in each dept if dept_id salary is not 100
+select DEPARTMENT_ID, max(SALARY)
+from EMPLOYEES
+where DEPARTMENT_ID !=100
+group by DEPARTMENT_ID
+--having DEPARTMENT_ID !=100
+;
+--do not use WHERE with filtered results: max, min, avg, count etc.
+
+
+
+
 
 
