@@ -83,9 +83,203 @@ from EMPLOYEES;
 select FIRST_NAME, SALARY, SALARY + 5000 as "ICREASED_SALARY"
 from EMPLOYEES;
 --display name and salary and decreased salary after 2000 cut
---and yearly salary ->multiply by 12
---and weekly rate -> divide by 4
 select FIRST_NAME, SALARY, SALARY - 2000 as "DECREASED_SALARY"
 from EMPLOYEES;
+--and yearly salary ->multiply by 12
+select FIRST_NAME, SALARY, SALARY * 12 as "YEARLY_SALARY"
+from EMPLOYEES;
+--and weekly rate -> divide by 4
+select FIRST_NAME, SALARY, SALARY / 4 as "WEEKLY_SALARY"
+from EMPLOYEES;
+--summary table
+select FIRST_NAME, SALARY,
+       SALARY + 5000 as "ICREASED_SALARY",
+       SALARY - 2000 as "DECREASED_SALARY",
+       SALARY * 12 as "YEARLY_SALARY",
+       SALARY / 4 as "WEEKLY_SALARY"
+from EMPLOYEES;
+
+              --SQL built-in functions:
+--reusable code that wrapped into function for common tasks
+--like ruonding number, getting length of string and more
+--single row function: affects each row and return same number of row
+--FEW TEXT FUNCTIONS:
+--upper; accept one parameter (column name) and return upper case
+--lower; accept one parameter (column name) and return lower case
+--length; return with length
+
+--display first name and upper, lower and length of first name
+select FIRST_NAME,
+       upper(FIRST_NAME) as "UPPERCASE_NAME",
+       lower(FIRST_NAME) as "LOWERCASE_NAME",
+       length(FIRST_NAME) as "CHAR_COUNT"
+from EMPLOYEES;
+
+--display all first names and chars count
+--display only if chars count exactly 5
+select FIRST_NAME, length(FIRST_NAME)
+from EMPLOYEES
+where length(FIRST_NAME) = 5;
+
+-- ONLY DISPLAY IF FIRST NAME CHARACTER COUNT IS MORE THAN 10
+select FIRST_NAME, length(FIRST_NAME)
+from EMPLOYEES
+where length(FIRST_NAME) > 10;
+-- ONLY DISPLAY IF FIRST NAME CHARACTER COUNT BETWEEN 7-9
+select FIRST_NAME, length(FIRST_NAME)
+from EMPLOYEES
+where length(FIRST_NAME) between 7 and 9;
+-- ONLY DISPLAY IF FIRST NAME CHARACTER COUNT NOT BETWEEN 5-10
+select FIRST_NAME, length(FIRST_NAME)
+from EMPLOYEES
+where length(FIRST_NAME) not between 5 and 10;
+-- ONLY DISPLAY IF FIRST NAME CHARACTER COUNT IS 2 OR 9 OR 11
+select FIRST_NAME, length(FIRST_NAME)
+from EMPLOYEES
+where length(FIRST_NAME) in (2, 9, 11);
+
+--display first names that contains 'd' or 'D'
+--transform everything to lower or upper case and then search
+select FIRST_NAME, upper(FIRST_NAME)
+from EMPLOYEES
+where upper(FIRST_NAME) like '%D%';
+
+--you can use single row anywhere
+--including in selecting column list, conditions, order by
+select FIRST_NAME
+from EMPLOYEES
+order by  length(FIRST_NAME) desc ;
+--this will return with the list starting from less letters to larger
+--or add 'desc' in opposite order from large to smaller
+
+                 -- NUMBER FUNCTIONS:
+--round (decimal number here) -> rounder nym
+--round (decimal number, digit you wanna keep) - round num with desired digits
+
+---ROUND (DECIMAL NUMBER HERE, DIGIT YOU WANNA KEEP)  -->> ROUNDED NUMBER WITH DESIRED DIGIT
+--      ROUND(3.4444444 , 1) = > 3.4
+--      ROUND(3.4444444 , 2) = > 3.44
+--      ROUND(3.4444444 , 3) = > 3.444
+--      ROUND(3.4444444 , 4) = > 3.4444
+--      ROUND(100, 4) => 100
+
+--display salary and daily salary of employee
+--indicate how many digits you want after dot
+select SALARY,
+       round(SALARY/30),
+       round(SALARY/30, 2)
+from EMPLOYEES;
+
+       --MULTI ROW FUNCTION | GROUP FUNCTIONS | AGGREGATE FUNCTIONS
+--count, max, min, sun, avg
+--count(*) and count(FIRST_NAME) will count the same q-ty of first names
+--you can use 'count' either with * or column name
+--will return with non-null row only
+select count(*), count(FIRST_NAME)
+from EMPLOYEES;
+
+--commission pct is percentage value
+--we have only 35 with commission_pct value not null
+select count(COMMISSION_PCT)
+from EMPLOYEES;
+
+--get the employee with dept_id is 90
+select count(*)
+from EMPLOYEES
+where DEPARTMENT_ID =90;
+
+               --display MAX salary employee
+select max(SALARY)
+from EMPLOYEES;
+
+ --display MAX salary employee but exclude the biggest one
+select SALARY
+from EMPLOYEES
+where SALARY != 24000;
+
+--display MAX salary after the biggest one
+select max(SALARY)
+from EMPLOYEES
+where SALARY <> 24000;
+
+            --display MIN salary employee
+select min(SALARY)
+from EMPLOYEES;
+
+--display MIN salary employee excluding the smallest
+select MIN(SALARY)
+from EMPLOYEES
+where SALARY != 2100;
+
+                --get the sum of all employees
+--get a sum of salary of employees from dept 90
+select sum(SALARY)
+from EMPLOYEES
+where DEPARTMENT_ID =90;
+
+        --display average salary of all employee
+select avg(SALARY)
+from EMPLOYEES;
+
+--rounding to 2 digits
+select round(avg(SALARY), 2)
+from EMPLOYEES;
+
+                  --SUMMARIZE, all in one
+select count(*) as "EMPLOYEE COUNT",
+       max(SALARY) as "HIGHEST SALARY",
+       min(SALARY) as "LOWEST SALARY",
+       sum(SALARY) as "SUM OF ALL SALARY",
+       avg(SALARY) as "AVERAGE SALARY"
+from EMPLOYEES;
+
+                     --GROUP BY
+-- can be used along with multi-row (aggregate, group)
+--to generate result per group instead of whole table
+-- IT CAN ONLY BE USED ALONG WITH MULTI-ROW FUNCTIONS
+-- CAN NOT BE USED BY ITSELF
+SELECT MAX(SALARY)
+FROM EMPLOYEES ;
+
+--display count of employees in each dept
+select count(*)
+from EMPLOYEES
+group by DEPARTMENT_ID;
+
+select DEPARTMENT_ID,
+       count(*) as "DEP_EMP_COUNT"
+from EMPLOYEES
+group by DEPARTMENT_ID;
+
+--display count of employee in each job_id
+SELECT JOB_ID,
+         COUNT(*) AS "JOBD_EMP_COUNT"
+FROM EMPLOYEES
+GROUP BY JOB_ID;
+
+--display max salary of each dept
+select DEPARTMENT_ID, max(SALARY) as "MAX_SALARY"
+from EMPLOYEES
+group by DEPARTMENT_ID;
+--display min salary of each dept
+select DEPARTMENT_ID, min(SALARY) as "MIN_SALARY"
+from EMPLOYEES
+group by DEPARTMENT_ID;
+--display sum salary of each dept
+select DEPARTMENT_ID, sum(SALARY) as "SUM_SALARY"
+from EMPLOYEES
+group by DEPARTMENT_ID;
+--display avg salary of each dept
+select DEPARTMENT_ID, round(avg(SALARY)) as "AVG_SALARY"
+from EMPLOYEES
+group by DEPARTMENT_ID;
+
+--display count of countries in each region
+select REGION_ID, count(*) as "NUMBER_OF_COUNTRIES"
+from COUNTRIES
+group by REGION_ID;
+
+--display count of depts in each location_id
+
 
 
