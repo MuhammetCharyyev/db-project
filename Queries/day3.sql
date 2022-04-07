@@ -26,5 +26,51 @@ from EMPLOYEES
 group by FIRST_NAME
 having count(*) >1;
 
+SELECT EMPLOYEES.FIRST_NAME
+FROM EMPLOYEES ;
+
+SELECT bla.FIRST_NAME
+FROM EMPLOYEES bla;
+
                                --SQL JOIN--
+
+--used to get data from 2 or more tables that related to each other
+--primary key and foreign relationship
+
+--INNER JOIN, LEFT OUTER JOIN, RIGHT OUTER JOIN, FULL OUTER JOIN
+
+-- IN ORDER TO JOIN TWO TABLES THAT HAS RELATIONSHIP
+-- SELECT DESIRED COLUMNS FROM BOTH TABLES
+-- FROM TABLE 1
+-- INNER JOIN TABLE 2 ON THE COMMON COLUMN
+
+
+select COUNTRIES.COUNTRY_NAME, REGIONS.REGION_NAME
+from COUNTRIES
+inner join REGIONS on COUNTRIES.REGION_ID = REGIONS.REGION_ID;
+
+--we can use alias for table to make above query slightly more readable
+--nick names are followed by space and letter or word
+--you can use nickname to select columns
+--just like you did in java obj.VariableName
+select c.COUNTRY_NAME, r.REGION_NAME
+from COUNTRIES c
+inner join REGIONS r on c.REGION_ID = r.REGION_ID;
+--we simply rename COUNTRIES to 'c' and REGIONS to 'r'
+
+--find out City (Location) and Country_name (Countries)
+select LOCATIONS.CITY, COUNTRIES.COUNTRY_NAME
+from LOCATIONS
+inner join COUNTRIES on LOCATIONS.COUNTRY_ID = COUNTRIES.COUNTRY_ID;
+
+select l.CITY, c.COUNTRY_NAME
+from LOCATIONS l
+inner join COUNTRIES c on l.COUNTRY_ID = c.COUNTRY_ID;
+--renaming to simple 'l' and 'c'
+
+select l.CITY, c.COUNTRY_NAME
+from COUNTRIES c
+inner join LOCATIONS l on l.COUNTRY_ID = c.COUNTRY_ID;
+--change table but same result, left table is going first and right is going last
+
 
