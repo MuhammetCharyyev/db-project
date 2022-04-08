@@ -131,3 +131,32 @@ FULL OUTER JOIN DEPARTMENTS d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID ;
 select d.DEPARTMENT_NAME, l.CITY
 from DEPARTMENTS d
 inner join LOCATIONS l on d.LOCATION_ID = l.LOCATION_ID;
+
+--Display first name and job_title
+select e.FIRST_NAME, j.JOB_TITLE
+from EMPLOYEES e
+inner join JOBS j on j.JOB_ID = e.JOB_ID;
+
+--Display first name(employees) and job_title(jobs) and dept_name(departments)
+select e.FIRST_NAME, j.JOB_TITLE, d.DEPARTMENT_NAME
+from EMPLOYEES e
+inner join JOBS j on j.JOB_ID = e.JOB_ID
+inner join DEPARTMENTS d on d.DEPARTMENT_ID = e.DEPARTMENT_ID;
+
+--this is the no alias version of same query
+select EMPLOYEES.FIRST_NAME, JOBS.JOB_TITLE, DEPARTMENTS.DEPARTMENT_NAME
+from EMPLOYEES
+inner join JOBS  on EMPLOYEES.JOB_ID = JOBS.JOB_ID
+inner join DEPARTMENTS  on EMPLOYEES.DEPARTMENT_ID = DEPARTMENTS.DEPARTMENT_ID;
+
+--display city(locations), country name(Countries), region name(regions)
+select l.CITY, c.COUNTRY_NAME, r.REGION_NAME
+from LOCATIONS l
+inner join COUNTRIES c on c.COUNTRY_ID = l.COUNTRY_ID
+inner join REGIONS r on r.REGION_ID = c.REGION_ID;
+
+
+SELECT  d.DEPARTMENT_NAME, count (e.FIRST_NAME)
+FROM EMPLOYEES e
+FULL OUTER JOIN DEPARTMENTS d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID
+group by d.DEPARTMENT_NAME;
