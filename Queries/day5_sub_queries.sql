@@ -109,6 +109,9 @@ from (select DEPARTMENT_ID, count(*) as EMPLOYEE_COUNT
 
 --dense_rank function that fall into category of analytical functions
 -- dense_rank() over(order by salary)
+-- IT MEANS GENERATE RANK NUMBER FOR SALARY
+-- USING SALARY DESCENDING ORDER
+-- max salary get 1 , second max get 2 , third max get 3 .....
 select FIRST_NAME, SALARY,
        dense_rank() over (order by salary desc) as SALARY_RANK
 from EMPLOYEES;
@@ -122,7 +125,8 @@ from (select FIRST_NAME, SALARY,
       from EMPLOYEES)
 where SALARY_RANK = 4;
 
-
+--100, 34, 88, 90, 55
+-- 5   1   3   4   2    -> ranking example
 
 
 
