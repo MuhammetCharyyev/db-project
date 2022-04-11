@@ -38,7 +38,28 @@ select  max(SALARY)
 from EMPLOYEES
 where SALARY != (select max(SALARY)
                  from EMPLOYEES);
+--find 3d max salary
+select  max(SALARY)
+from EMPLOYEES
+where SALARY < (select  max(SALARY)
+                from EMPLOYEES
+                where SALARY != (select max(SALARY) from EMPLOYEES));
+               --filter all salary less than 2nd max
+               --just replace with above query
 
+--find first_name of empl who works in Executive Dept
+
+--find the dept_id of executive
+select DEPARTMENT_ID from DEPARTMENTS
+where DEPARTMENT_NAME = 'Executive';
+
+select FIRST_NAME from EMPLOYEES
+where DEPARTMENT_ID = 90;
+
+--now combine them
+select FIRST_NAME from EMPLOYEES
+where DEPARTMENT_ID = (select DEPARTMENT_ID from DEPARTMENTS
+                       where DEPARTMENT_NAME = 'Executive');
 
 
 
