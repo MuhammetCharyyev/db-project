@@ -113,6 +113,16 @@ select FIRST_NAME, SALARY,
        dense_rank() over (order by salary desc) as SALARY_RANK
 from EMPLOYEES;
 
+--now we can see result of above query as a table
+--select from this table and filter the result
+--by SALARY_RANK = NTH (the number you want)
+select*
+from (select FIRST_NAME, SALARY,
+             dense_rank() over (order by salary desc) as SALARY_RANK
+      from EMPLOYEES)
+where SALARY_RANK = 4;
+
+
 
 
 
