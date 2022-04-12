@@ -24,7 +24,9 @@ public class LoopingThroughResultSet {
             while (rs.next()){
                 System.out.println("rs.getString(\"REGION_NAME\") = "
                         + rs.getString("REGION_NAME"));
+                //will print all 4 regions in table
             }
+
         } catch (SQLException e) {
             System.out.println("Exception occured " + e.getMessage());;
         }
