@@ -2,8 +2,7 @@ package com.cydeo.day1;
 
 import java.sql.*;
 
-
-public class TestOracleConnection {
+public class SimpleNavigation {
 
     public static void main(String[] args) throws SQLException {
 
@@ -24,9 +23,9 @@ public class TestOracleConnection {
         // ANYTHING DOES NOT WORK MANUALLY WILL NOT WORK AUTOMATION
 
 
-            Connection connection = DriverManager.getConnection(url, username, password);
-            //as getConnection is exception we'll declare it with throw
-            System.out.println("Connection is successful");
+        Connection connection = DriverManager.getConnection(url, username, password);
+        //as getConnection is exception we'll declare it with throw
+        System.out.println("Connection is successful");
 
         //once we have connection we can use this connection object to
 
@@ -39,7 +38,7 @@ public class TestOracleConnection {
         ResultSet rs = statement.executeQuery("select * from REGIONS");
 
         //by default the pointer(cursor) of the ResultSet object is at location known
-      // as BeforeFirst, right before the first row in order to get the to first row
+        // as BeforeFirst, right before the first row in order to get the to first row
         //you need to call next() method
         rs.next();// now we are at the first row
 
@@ -49,7 +48,7 @@ public class TestOracleConnection {
         //getString, getInt, getDouble and so on
         System.out.println("rs.getString(\"REGION_ID\") = "
                 + rs.getString("REGION_ID")); //1
-           //first column of the 1 row
+        //first column of the 1 row
         System.out.println("rs.getString(\"REGION_NAME\") = "
                 + rs.getString("REGION_NAME")); //Europe
         //second column of the 1 row
@@ -83,6 +82,8 @@ public class TestOracleConnection {
         System.out.println("rs.getString(\"REGION_NAME\") = "
                 + rs.getString("REGION_NAME")); //Middle East and Africa
         //second column of the 4 row
+
+        //now try to get cell value
 
 
     }
