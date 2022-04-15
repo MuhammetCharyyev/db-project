@@ -35,27 +35,27 @@ public class Library2DB_Test {
                 ResultSet.CONCUR_READ_ONLY);
         ResultSet rs    = stmt.executeQuery("select * from books") ;
 
-        while(rs.next() ){
-            System.out.println("rs.getString(\"name\") = "
-                    + rs.getString("name"));
-        }
-//        // print out the first book name
-//        rs.next() ; // row 1
-//        System.out.println("rs.getString(\"name\") = " + rs.getString("name"));
-//
-//        // WHAT IF NOW I WANT TO RUN THIS QUERY : SELECT COUNT(*) FROM books
-//        // JUST CALL THE stmt.executeQuery again and save the result
-//        // into rs variable or new variable with type ResultSet
-//        rs =  stmt.executeQuery("SELECT COUNT(*) AS BOOK_COUNT FROM books") ;
-//        // move to first row
-//        rs.next() ;
-//        System.out.println("rs.getString(\"BOOK_COUNT\") = "
-//                + rs.getString("BOOK_COUNT"));
-//
-//        // Can I not overwrite previous ResultSet object and save it into new ResultSet variable
-//        // YES YOU CAN !
-//        ResultSet rs2 =  stmt.executeQuery("SELECT * from users") ;
-//        // do your thing here
+//        while(rs.next() ){
+//            System.out.println("rs.getString(\"name\") = "
+//                    + rs.getString("name"));
+//        }
+        // print out the first book name
+        rs.next() ; // row 1
+        System.out.println("rs.getString(\"name\") = " + rs.getString("name"));
+
+        // WHAT IF NOW I WANT TO RUN THIS QUERY : SELECT COUNT(*) FROM books
+        // JUST CALL THE stmt.executeQuery again and save the result
+        // into rs variable or new variable with type ResultSet
+        rs =  stmt.executeQuery("SELECT COUNT(*) AS BOOK_COUNT FROM books") ;
+        // move to first row
+        rs.next() ;
+        System.out.println("rs.getString(\"BOOK_COUNT\") = "
+                + rs.getString("BOOK_COUNT"));
+
+        // Can I not overwrite previous ResultSet object and save it into new ResultSet variable
+        // YES YOU CAN !
+        ResultSet rs2 =  stmt.executeQuery("SELECT * from users") ;
+        // do your thing here
 
     }
 }
