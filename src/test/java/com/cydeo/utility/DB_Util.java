@@ -165,10 +165,7 @@ public class DB_Util {
 
                 String cellValue =  rs.getString( colIndex ) ;
                 rowDataAsLst.add(   cellValue  ) ;
-
             }
-
-
         } catch (Exception e) {
             System.out.println("ERROR OCCURRED WHILE getRowDataAsList " + e.getMessage() );
         }finally {
@@ -337,7 +334,6 @@ public class DB_Util {
         int columnCount = getColumnCount() ;
 
         try{
-
             rs.absolute(rowNum) ;
 
             for (int colIndex = 1; colIndex <= columnCount ; colIndex++) {
