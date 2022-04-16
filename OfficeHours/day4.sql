@@ -57,9 +57,30 @@ select FIRST_NAME, SALARY, JOB_TITLE, MAX_SALARY from EMPLOYEES
 right outer join JOBS on EMPLOYEES.SALARY = JOBS.MAX_SALARY;
 
 -- 11.get me department name, city in same table
+select DEPARTMENT_NAME, CITY
+from DEPARTMENTS
+full outer join LOCATIONS  on LOCATIONS.LOCATION_ID = DEPARTMENTS.LOCATION_ID;
+
 -- 12. get me first name , start date, end date in same table
+select FIRST_NAME, START_DATE, END_DATE
+from EMPLOYEES
+full join JOB_HISTORY on EMPLOYEES.EMPLOYEE_ID = JOB_HISTORY.EMPLOYEE_ID;
+
 -- 13. create a table name laptops, with id, brand, color, price
+CREATE TABLE LAPTOPS
+(   ID    integer primary key,
+    brand VARCHAR(25),
+    color VARCHAR(25),
+    Price integer );
+
+select * from LAPTOPS;
+
 -- 14. create table phones with id, brand, color, price
+create table phones(id_number integer primary key ,
+                       brand varchar(25),
+                       color varchar(25),
+                       price integer);
+
 -- 15. insert laptops table below values
 /*
  1. (1, 'hp' , 'black', 1500)
@@ -68,6 +89,11 @@ right outer join JOBS on EMPLOYEES.SALARY = JOBS.MAX_SALARY;
  4. (4, 'hp', 'white', 1300)
  5. (5, 'macbook', 'white', 1800)
  */
+insert into laptops values (1, 'hp', 'black', 1500);
+insert into laptops values (2, 'msi', 'grey', 1300);
+insert into laptops values (3, 'dell', 'red', 1600);
+insert into laptops values (4, 'hp', 'white', 1300);
+insert into laptops values (5, 'macbook', 'white', 1800);
 
 -- 16. insert phones table belwo values
 /*
@@ -76,11 +102,47 @@ right outer join JOBS on EMPLOYEES.SALARY = JOBS.MAX_SALARY;
     3. (3, 'msi', 'black', 800)
     4. (4, 'iphone', 'white', 1100)
  */
+insert into phones values (1, 'samsung', 'black', 700);
+insert into phones values (2, 'dell', 'grey', 1000);
+insert into phones values (3, 'msi', 'black', 800);
+insert into phones values (4, 'iphone', 'white', 1100);
+
 -- 17. update dell price to 1500
+update laptops
+set price = 1500
+where ID = 3;
+
+select * from laptops;
+
 -- 18. delete macbook from table
+delete  from laptops
+where ID = 5;
+
 -- 19. combine all brand names in one table( from laptops and phones)
+select brand from laptops
+union select brand from  PHONES;
+
 -- 20. combine unique brand names in one table
+select brand , color from LAPTOPS
+union all select brand from  PHONES;
+
 -- 21. get me unique prices and sort them
+select price from LAPTOPS
+union  select price from PHONES;
+
 -- 22. get me common colors for phones and laptops
+select color from LAPTOPS
+intersect
+select color from PHONES;
+
 -- 23. get me the colors only laptops have
+select color from LAPTOPS
+minus select color from PHONES;
+
+select color from LAPTOPS;
+select COLOR from PHONES;
+
 -- 24. get me the brands only phones have
+select brand from PHONES
+minus
+select brand from LAPTOPS
