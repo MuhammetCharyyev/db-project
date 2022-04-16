@@ -234,7 +234,13 @@ public class DB_Util {
 
     }
 
-    //
+    /**
+     * Get First Cell Value at First row First Column
+     * @return as number
+     */
+    public int getFirstCellAsInt(){
+        return Integer.parseInt(getCellValue(1,1) );
+    }
 
     /**
      * getting entire column data as list according to column number
